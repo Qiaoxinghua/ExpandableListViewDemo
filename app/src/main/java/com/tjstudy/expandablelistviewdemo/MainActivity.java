@@ -418,11 +418,13 @@ public class MainActivity extends AppCompatActivity {
                 final ImageView ivChildCheck = (ImageView) view.findViewById(R.id.iv_child_icon);
                 final TextView tvChildName = (TextView) view.findViewById(R.id.tv_child_name);
                 final TextView tvChildPrice = (TextView) view.findViewById(R.id.tv_child_price);
+                final TextView tvChildNum = (TextView) view.findViewById(R.id.tv_child_num);
                 final View divider = view.findViewById(R.id.divider);
                 final List<Shop.Goods> goodsList = shopList.get(groupPosition).getGoods();
                 final Shop.Goods goods = goodsList.get(childPosition);
                 tvChildPrice.setText("￥" + goods.getGoodsPrice());
                 tvChildName.setText(goods.getGoodsName());
+                tvChildNum.setText("x"+goods.getGoodsCount());
                 calculate();
                 if (childPosition==goodsList.size()-1){
                     divider.setVisibility(View.VISIBLE);

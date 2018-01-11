@@ -45,7 +45,7 @@
 
         <TextView
             android:id="@+id/tv_child_price"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/iv_child_logo"
             android:layout_marginLeft="10dp"
@@ -54,13 +54,27 @@
             android:text="￥100.00"
             android:textColor="#f2f"
             android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_child_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/iv_child_logo"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/tv_child_price"
+            android:gravity="right"
+            android:padding="10dp"
+            android:text="x2"
+            android:textColor="#f2f"
+            android:textSize="16sp" />
     </RelativeLayout>
 
     <View
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/ll_child"
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_below="@+id/ll_child"
+        android:layout_marginTop="10dp"
         android:background="#e5e5e5" />
 </RelativeLayout>
