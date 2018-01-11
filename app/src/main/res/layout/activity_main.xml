@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.tjstudy.expandablelistviewdemo.MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="52dp">
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="购物车(0)"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/tv_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:text="编辑"
+            android:textColor="#000" />
+        <View
+            android:background="#e5e5e5"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="0.3dp"/>
+    </RelativeLayout>
+
+    <ExpandableListView
+        android:id="@+id/elv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ll_bottom"
+        android:layout_below="@+id/rl_top"
+        android:background="#ffffff"
+        android:cacheColorHint="#00000000"
+        android:divider="@null"
+        android:scrollbars="none"
+        android:listSelector="#00000000" />
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:id="@+id/ll_bottom"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <!--普通模式下-->
+        <RelativeLayout
+            android:id="@+id/rl_normal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#f66">
+
+            <ImageView
+                android:id="@+id/iv_all_check"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:padding="5dp"
+                android:src="@mipmap/ic_uncheck" />
+
+            <TextView
+                android:id="@+id/tv_group_name"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/iv_all_check"
+                android:gravity="center_vertical"
+                android:text="全选"
+                android:textColor="#fff"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/tv_group_name"
+                android:gravity="center_vertical"
+                android:text="合计:"
+                android:textColor="#fff"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_total_price"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/tv"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="￥0.00"
+                android:textColor="#fff"
+                android:textSize="16sp" />
+        </RelativeLayout>
+        <!--编辑模式下-->
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/rl_edit"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#f66">
+
+            <ImageView
+                android:id="@+id/iv_all_edit_check"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:padding="5dp"
+                android:src="@mipmap/ic_uncheck" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/iv_all_edit_check"
+                android:gravity="center_vertical"
+                android:text="全选"
+                android:textColor="#fff"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_collect"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:text="移入收藏夹"
+                android:layout_toLeftOf="@+id/tv_delete"
+                android:textColor="#fff"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="删除"
+                android:layout_marginRight="10dp"
+                android:textColor="#fff"
+                android:textSize="16sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

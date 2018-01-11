@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:id="@+id/ll_child"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/iv_child_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:padding="5dp"
+            android:src="@mipmap/ic_uncheck" />
+
+        <ImageView
+            android:id="@+id/iv_child_logo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/iv_child_icon"
+            android:scaleType="fitXY"
+            android:src="@mipmap/cart_item_img" />
+
+        <TextView
+            android:id="@+id/tv_child_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/iv_child_logo"
+            android:padding="10dp"
+            android:text="商品名称"
+            android:textColor="#000"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_child_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/iv_child_logo"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/iv_child_logo"
+            android:padding="10dp"
+            android:text="￥100.00"
+            android:textColor="#f2f"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/ll_child"
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e5e5e5" />
+</RelativeLayout>
