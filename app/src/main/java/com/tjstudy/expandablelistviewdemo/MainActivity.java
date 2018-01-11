@@ -16,7 +16,7 @@ import android.widget.Toast;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-//多店铺购物车20180111
+//多店铺购物车实现
 public class MainActivity extends AppCompatActivity {
     private ExpandableListView elv;
     private ImageView ivAllCheck;//全选按钮
