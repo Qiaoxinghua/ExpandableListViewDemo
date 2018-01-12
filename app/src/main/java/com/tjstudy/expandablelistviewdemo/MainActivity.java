@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+
 //多店铺购物车实现201801111824
 public class MainActivity extends AppCompatActivity {
     private ExpandableListView elv;
@@ -139,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < shopList.size(); i++) {
             dataRemove.clear();
             for (int k = 0; k < shopList.get(i).getGoods().size(); k++) {
-                if (shopList.get(i).getGoods().get(k).isGoodsSelect()){
+                if (shopList.get(i).getGoods().get(k).isGoodsSelect()) {
                     dataRemove.add(shopList.get(i).getGoods().get(k));
                 }
             }
@@ -175,18 +176,18 @@ public class MainActivity extends AppCompatActivity {
      * 清除选中的状态
      */
     private void clearStatus() {
-            ivAllCheck.setImageResource(R.mipmap.ic_uncheck);
-            ivAllEditCheck.setImageResource(R.mipmap.ic_uncheck);
-            //设置全部店铺，和店铺内商品为未选中状态
-            for (int j = 0; j < shopList.size(); j++) {
-                shopList.get(j).setShopSelect(false);
-                for (int k = 0; k < shopList.get(j).getGoods().size(); k++) {
-                    shopList.get(j).getGoods().get(k).setGoodsSelect(false);
-                }
+        ivAllCheck.setImageResource(R.mipmap.ic_uncheck);
+        ivAllEditCheck.setImageResource(R.mipmap.ic_uncheck);
+        //设置全部店铺，和店铺内商品为未选中状态
+        for (int j = 0; j < shopList.size(); j++) {
+            shopList.get(j).setShopSelect(false);
+            for (int k = 0; k < shopList.get(j).getGoods().size(); k++) {
+                shopList.get(j).getGoods().get(k).setGoodsSelect(false);
             }
-            baseExpandableListAdapter.notifyDataSetChanged();
-            //清除状态之后重新计算一下
-            calculate();
+        }
+        baseExpandableListAdapter.notifyDataSetChanged();
+        //清除状态之后重新计算一下
+        calculate();
     }
 
     /**
@@ -229,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void calculate() {
         double total = 0.00;
-        int count =0;
+        int count = 0;
         for (int i = 0; i < shopList.size(); i++) {
             Shop shop = shopList.get(i);
             List<Shop.Goods> goodsList = shop.getGoods();
@@ -264,8 +265,8 @@ public class MainActivity extends AppCompatActivity {
             for (int j = 0; j < 3; j++) {
                 //每个店铺三个商品
                 Shop.Goods goods = new Shop.Goods();
-                goods.setGoodsId("goods_id_" + j);
-                goods.setGoodsName("goods_name_" + j);
+                goods.setGoodsId("goods_id_" + i+j);
+                goods.setGoodsName("goods_name_" +i+ j);
                 goods.setGoodsImgUrl("");//图片地址先不设置
                 goods.setGoodsPrice(10 + j + "");
                 goods.setGoodsCount(2 + j);//商品数量
@@ -334,9 +335,9 @@ public class MainActivity extends AppCompatActivity {
                 final Shop shop = shopList.get(groupPosition);
                 String shopName = shop.getShopName();//店铺名称
                 tvGroupName.setText(shopName);
-                if (shop.getGoods().size()==0){
+                if (shop.getGoods().size() == 0) {
                     rlGroup.setVisibility(View.GONE);
-                }else{
+                } else {
                     rlGroup.setVisibility(View.VISIBLE);
                 }
                 if (shop.isShopSelect()) {
@@ -393,16 +394,18 @@ public class MainActivity extends AppCompatActivity {
                 final TextView tvChildName = (TextView) view.findViewById(R.id.tv_child_name);
                 final TextView tvChildPrice = (TextView) view.findViewById(R.id.tv_child_price);
                 final TextView tvChildNum = (TextView) view.findViewById(R.id.tv_child_num);
+                final TextView tvMinus = (TextView) view.findViewById(R.id.tv_minus);
+                final TextView tvPlus = (TextView) view.findViewById(R.id.tv_plus);
                 final View divider = view.findViewById(R.id.divider);
                 final List<Shop.Goods> goodsList = shopList.get(groupPosition).getGoods();
                 final Shop.Goods goods = goodsList.get(childPosition);
                 tvChildPrice.setText("￥" + goods.getGoodsPrice());
                 tvChildName.setText(goods.getGoodsName());
-                tvChildNum.setText("x"+goods.getGoodsCount());
+                tvChildNum.setText(String.valueOf(goods.getGoodsCount()));
                 calculate();
-                if (childPosition==goodsList.size()-1){
+                if (childPosition == goodsList.size() - 1) {
                     divider.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     divider.setVisibility(View.GONE);
                 }
 
@@ -440,6 +443,30 @@ public class MainActivity extends AppCompatActivity {
                         //刷新一下
                         notifyDataSetChanged();
 
+                    }
+                });
+                //减按钮
+                tvMinus.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int goodsCount = goods.getGoodsCount();
+                        if (goods.getGoodsCount() > 1) {
+                            goods.setGoodsCount(goodsCount - 1);
+                        } else {
+                            Toast.makeText(MainActivity.this, "商品数量不能为0", Toast.LENGTH_SHORT).show();
+                        }
+                        tvChildNum.setText(String.valueOf(goods.getGoodsCount()));
+                        baseExpandableListAdapter.notifyDataSetChanged();
+                    }
+                });
+                //加按钮
+                tvPlus.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int goodsCount = goods.getGoodsCount();
+                        goods.setGoodsCount(goodsCount + 1);
+                        tvChildNum.setText(String.valueOf(goods.getGoodsCount()));
+                        baseExpandableListAdapter.notifyDataSetChanged();
                     }
                 });
                 return view;
