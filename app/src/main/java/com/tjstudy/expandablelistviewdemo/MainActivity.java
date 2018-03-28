@@ -136,16 +136,23 @@ public class MainActivity extends AppCompatActivity {
      * 删除购物车内选中的商品
      */
     private void delete() {
-        List<Shop.Goods> dataRemove = new ArrayList<>();
+        //要删除的商品集合
+        List<Shop.Goods> goodsRemove = new ArrayList<>();
+        //要删除的店铺集合
+        List<Shop> shopRemove = new ArrayList<>();
         for (int i = 0; i < shopList.size(); i++) {
-            dataRemove.clear();
+            goodsRemove.clear();
             for (int k = 0; k < shopList.get(i).getGoods().size(); k++) {
                 if (shopList.get(i).getGoods().get(k).isGoodsSelect()) {
-                    dataRemove.add(shopList.get(i).getGoods().get(k));
+                    goodsRemove.add(shopList.get(i).getGoods().get(k));
                 }
             }
-            shopList.get(i).getGoods().removeAll(dataRemove);
+            shopList.get(i).getGoods().removeAll(goodsRemove);
+            if (shopList.get(i).getGoods().size() == 0) {
+                shopRemove.add(shopList.get(i));
+            }
         }
+        shopList.removeAll(shopRemove);
         baseExpandableListAdapter.notifyDataSetChanged();
         //删除之后清除一下状态
         clearStatus();
@@ -243,9 +250,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 count++;
             }
-            DecimalFormat df = new DecimalFormat("0.00");
-            tvTotalPrice.setText("￥" + df.format(total));
         }
+        DecimalFormat df = new DecimalFormat("0.00");
+        tvTotalPrice.setText("￥" + df.format(total));
         tvTitle.setText("购物车(" + count + ")");
     }
 
@@ -265,8 +272,8 @@ public class MainActivity extends AppCompatActivity {
             for (int j = 0; j < 3; j++) {
                 //每个店铺三个商品
                 Shop.Goods goods = new Shop.Goods();
-                goods.setGoodsId("goods_id_" + i+j);
-                goods.setGoodsName("goods_name_" +i+ j);
+                goods.setGoodsId("goods_id_" + i + j);
+                goods.setGoodsName("goods_name_" + i + j);
                 goods.setGoodsImgUrl("");//图片地址先不设置
                 goods.setGoodsPrice(10 + j + "");
                 goods.setGoodsCount(2 + j);//商品数量
@@ -349,10 +356,12 @@ public class MainActivity extends AppCompatActivity {
                 }
                 //控制全选按钮的状态
                 ivAllCheck.setImageResource(R.mipmap.ic_checked);
+                ivAllEditCheck.setImageResource(R.mipmap.ic_checked);
                 for (int i = 0; i < shopList.size(); i++) {
                     if (!shopList.get(i).isShopSelect()) {
                         //有一个店铺未选中，则全选按钮也设置未选中
                         ivAllCheck.setImageResource(R.mipmap.ic_uncheck);
+                        ivAllEditCheck.setImageResource(R.mipmap.ic_uncheck);
                     }
                 }
                 ivGroupCheck.setOnClickListener(new View.OnClickListener() {
